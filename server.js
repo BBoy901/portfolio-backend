@@ -1,38 +1,31 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express')
+const cors = require('cors')
 
-const app = express();
+const app = express()
 
-app.use(cors());
+app.use(cors())
+app.use(express.json())
 
-const profile = {
-  name: "Fadhila",
-  role: "Data Science Student",
-  skills: [
-    "Python",
-    "React",
-    "SQL",
-    "Cloud Hosting"
-  ],
-  projects: [
-    "Skin Disease Detection System",
-    "Portfolio Website",
-    "Data Dashboard"
-  ]
-};
-
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   res.json({
-    message: "Portfolio Backend API Running"
-  });
-});
+    message: 'Backend is running'
+  })
+})
 
-app.get("/profile", (req, res) => {
-  res.json(profile);
-});
+app.post('/contact', (req, res) => {
 
-const PORT = 5000;
+  const { name, email, message } = req.body
+
+  console.log(name, email, message)
+
+  res.json({
+    success: true,
+    message: 'Message received successfully'
+  })
+})
+
+const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+  console.log(`Server running on port ${PORT}`)
+})
